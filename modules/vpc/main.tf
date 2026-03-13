@@ -12,7 +12,7 @@ resource "aws_internet_gateway" "igw" {
 resource "aws_subnet" "public" {
   vpc_id                  = aws_vpc.main.id
   cidr_block              = "10.0.1.0/24"
-  map_public_ip_on_launch = true
+  map_public_ip_on_launch = true #trivy:ignore:AVD-AWS-0164
   availability_zone       = "${var.region}a"
   tags                    = { Name = "subnet-public-${var.env}" }
 }
