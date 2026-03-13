@@ -1,4 +1,3 @@
-# Récupère la dernière AMI Ubuntu 22.04
 data "aws_ami" "ubuntu" {
   most_recent = true
   owners      = ["099720109477"]
@@ -8,13 +7,11 @@ data "aws_ami" "ubuntu" {
   }
 }
 
-# Clé SSH
 resource "aws_key_pair" "this" {
   key_name   = "key-${var.env}"
   public_key = var.public_key
 }
 
-# Security Group — SSH + HTTP
 resource "aws_security_group" "ec2_sg" {
   name   = "ec2-sg-${var.env}"
   vpc_id = var.vpc_id
@@ -40,16 +37,19 @@ resource "aws_security_group" "ec2_sg" {
     cidr_blocks = ["0.0.0.0/0"] #trivy:ignore:AVD-AWS-0104
   }
 
-  tags = { Name = "sg-ec2-${var.env}" }
+  tags = { Name = "ec2-sg-${var.env}" }
 }
 
-# Instance EC2
 resource "aws_instance" "this" {
   ami                    = data.aws_ami.ubuntu.id
   instance_type          = var.instance_type
   subnet_id              = var.subnet_id
   vpc_security_group_ids = [aws_security_group.ec2_sg.id]
   key_name               = aws_key_pair.this.key_name
+
+  metadata_options {
+    http_tokens = "required"
+  }
 
   root_block_device {
     encrypted = true
