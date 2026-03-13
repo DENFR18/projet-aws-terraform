@@ -23,6 +23,7 @@ module "ec2" {
   vpc_id        = module.vpc.vpc_id
   subnet_id     = module.vpc.public_subnet_id
   instance_type = "t3.micro"
+  public_key = var.public_key
 }
 
 module "rds" {
