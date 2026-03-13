@@ -51,5 +51,9 @@ resource "aws_instance" "this" {
   vpc_security_group_ids = [aws_security_group.ec2_sg.id]
   key_name               = aws_key_pair.this.key_name
 
+  root_block_device {
+    encrypted = true
+  }
+
   tags = { Name = "ec2-${var.env}" }
 }
