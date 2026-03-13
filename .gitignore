@@ -1,0 +1,12 @@
+```
+# State local
+terraform.tfstate
+terraform.tfstate.backup
+.terraform.tfstate.lock.info
+
+# Credentials et clés
+*.csv
+rootkey.csv
+
+# Dossier provider
+.terraform/
