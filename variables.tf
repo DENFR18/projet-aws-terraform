@@ -13,6 +13,3 @@ variable "db_password" {
   sensitive = true
 }
 
-variable "public_key" {
-  type = string
-}

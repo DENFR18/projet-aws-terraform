@@ -17,13 +17,13 @@ module "vpc" {
   region = var.region
 }
 
-module "ec2" {
-  source        = "./modules/ec2"
-  env           = var.env
-  vpc_id        = module.vpc.vpc_id
-  subnet_id     = module.vpc.public_subnet_id
-  instance_type = "t3.micro"
-  public_key    = var.public_key
+module "eks" {
+  source              = "./modules/eks"
+  env                 = var.env
+  vpc_id              = module.vpc.vpc_id
+  public_subnet_id    = module.vpc.public_subnet_id
+  private_subnet_id   = module.vpc.private_subnet_id
+  private_subnet_b_id = module.vpc.private_subnet_b_id
 }
 
 module "rds" {

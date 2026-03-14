@@ -49,7 +49,7 @@ jobs:
           format: "table"
 
   # ============================================
-  # JOB 3 — Plan Terraform (sans appliquer)
+  # JOB 3 — Plan Terraform
   # ============================================
   terraform-plan:
     runs-on: ubuntu-latest
@@ -61,11 +61,6 @@ jobs:
     steps:
       - name: 📥 Récupération du code
         uses: actions/checkout@v4
-
-      - name: 🔑 Génération clé SSH
-        run: |
-          ssh-keygen -t rsa -b 4096 -f /tmp/aws_key -N ""
-          echo "TF_VAR_public_key=$(cat /tmp/aws_key.pub)" >> $GITHUB_ENV
 
       - name: 🔧 Installation Terraform
         uses: hashicorp/setup-terraform@v3
@@ -92,11 +87,6 @@ jobs:
     steps:
       - name: 📥 Récupération du code
         uses: actions/checkout@v4
-
-      - name: 🔑 Génération clé SSH
-        run: |
-          ssh-keygen -t rsa -b 4096 -f /tmp/aws_key -N ""
-          echo "TF_VAR_public_key=$(cat /tmp/aws_key.pub)" >> $GITHUB_ENV
 
       - name: 🔧 Installation Terraform
         uses: hashicorp/setup-terraform@v3

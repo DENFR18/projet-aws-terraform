@@ -1,5 +1,9 @@
-output "ec2_public_ip" {
-  value = module.ec2.public_ip
+output "cluster_name" {
+  value = module.eks.cluster_name
+}
+
+output "cluster_endpoint" {
+  value = module.eks.cluster_endpoint
 }
 
 output "db_endpoint" {
