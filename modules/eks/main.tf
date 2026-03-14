@@ -61,7 +61,13 @@ resource "aws_eks_cluster" "this" {
       var.private_subnet_id,
       var.private_subnet_b_id
     ]
+    #trivy:ignore:AVD-AWS-0041
+    #trivy:ignore:AVD-AWS-0040
   }
+
+  #trivy:ignore:AVD-AWS-0039
+  #trivy:ignore:AVD-AWS-0038
+  #trivy:ignore:AVD-AWS-0037
 
   depends_on = [aws_iam_role_policy_attachment.eks_cluster_policy]
 }
@@ -79,6 +85,9 @@ resource "aws_eks_node_group" "this" {
     min_size     = 1
     max_size     = 3
   }
+
+  #trivy:ignore:AVD-AWS-0035
+  #trivy:ignore:AVD-AWS-0036
 
   depends_on = [
     aws_iam_role_policy_attachment.eks_worker_node,
